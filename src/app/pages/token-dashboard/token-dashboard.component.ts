@@ -21,12 +21,22 @@ export class TokenDashboardComponent implements OnInit {
   mealDate = new Date().toISOString().substring(0, 10);
   quantity = 1;
 
+  // Halls of MBSTU
+  halls = [
+    'Shahid Ziaur Rahman Hall',
+    'Jananeta Abdul Mannan Hall',
+    'Bangabandhu Sheikh Mujibur Rahman Hall',
+    'Alema Khatun Bhashani Hall',
+    'Jahanara Imam Hall',
+    'Sheikh Russel Hall',
+    'Bangamata Sheikh Fojilatunnesa Mujib Hall'
+  ];
+  selectedHall = this.halls[0];
+
   tokens: any[] = [];
 
   // Payment modal state
   showPaymentModal = false;
-  bkashNumber = '';
-  trxId = '';
 
   constructor(private store: Store) {}
 
@@ -44,6 +54,7 @@ export class TokenDashboardComponent implements OnInit {
 
   handleBkashConfirm(event: { bkashNumber: string; trxId: string }) {
     const token = {
+      hall: this.selectedHall,
       meal: this.selectedMeal,
       date: this.mealDate,
       quantity: this.quantity,
@@ -53,7 +64,7 @@ export class TokenDashboardComponent implements OnInit {
       bkashNumber: event.bkashNumber,
       trxId: event.trxId
     };
-    
+
     this.tokens.push(token);
     this.showPaymentModal = false;
     alert('✅ Payment successful and token purchased!');

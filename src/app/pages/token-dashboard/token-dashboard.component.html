@@ -1,86 +1,95 @@
 <div class="max-w-4xl mx-auto p-6">
-    <!-- Student Info -->
-    <div class="bg-white p-6 rounded-lg shadow mb-6 border">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">👤 Student Information</h2>
-      <p><strong>Student ID:</strong> {{ student.id }}</p>
-      <p><strong>Name:</strong> {{ student.name }}</p>
-    </div>
-  
-    <!-- Token Purchase Form -->
-    <div class="bg-white p-6 rounded-lg shadow mb-6 border">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">🍱 Buy Meal Token</h2>
-  
-      <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Meal Selection -->
-        <div>
-          <label class="block mb-1 text-gray-700 font-medium">Select Meal</label>
-          <select [(ngModel)]="selectedMeal" name="meal" class="w-full border border-gray-300 p-2 rounded bg-white">
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-          </select>
-        </div>
-  
-        <!-- Date Selection -->
-        <div>
-          <label class="block mb-1 text-gray-700 font-medium">Meal Date</label>
-          <input type="date" [(ngModel)]="mealDate" name="date" class="w-full border border-gray-300 p-2 rounded bg-white" />
-        </div>
-  
-        <!-- Quantity -->
-        <div>
-          <label class="block mb-1 text-gray-700 font-medium">Quantity</label>
-          <input type="number" min="1" [(ngModel)]="quantity" name="quantity" class="w-full border border-gray-300 p-2 rounded bg-white" />
-        </div>
-  
-        <!-- Total Price & Pay Button -->
-        <div class="flex items-end">
-          <button
-            type="button"
-            (click)="openPaymentModal()"
-            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-          >
-            Pay ৳{{ quantity * 30 }} & Buy Token
-          </button>
-        </div>
-      </form>
-    </div>
-  
-    <!-- Purchased Tokens -->
-    <div class="bg-white p-6 rounded-lg shadow border">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">📄 Your Tokens</h2>
-  
-      <div *ngIf="tokens.length === 0" class="text-gray-500">No tokens purchased yet.</div>
-  
-      <table *ngIf="tokens.length > 0" class="w-full mt-4 border">
-        <thead>
-          <tr class="bg-gray-100 text-left">
-            <th class="p-2 border">Meal</th>
-            <th class="p-2 border">Date</th>
-            <th class="p-2 border">Quantity</th>
-            <th class="p-2 border">Price (৳)</th>
-            <th class="p-2 border">bKash No.</th>
-            <th class="p-2 border">Trx ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let t of tokens">
-            <td class="p-2 border">{{ t.meal }}</td>
-            <td class="p-2 border">{{ t.date }}</td>
-            <td class="p-2 border">{{ t.quantity }}</td>
-            <td class="p-2 border">{{ t.price }}</td>
-            <td class="p-2 border">{{ t.bkashNumber }}</td>
-            <td class="p-2 border">{{ t.trxId }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- Student Info -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6 border">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">👤 Student Information</h2>
+    <p><strong>Student ID:</strong> {{ student.id }}</p>
+    <p><strong>Name:</strong> {{ student.name }}</p>
   </div>
-  
-  <!-- bKash Payment Modal Component -->
-  <app-bkash-payment
-    [visible]="showPaymentModal"
-    (cancel)="cancelPayment()"
-    (confirm)="handleBkashConfirm($event)"
-  ></app-bkash-payment>
-  
+
+  <!-- Token Purchase Form -->
+  <div class="bg-white p-6 rounded-lg shadow mb-6 border">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">🍱 Buy Meal Token</h2>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Hall Selection -->
+      <div>
+        <label class="block mb-1 text-gray-700 font-medium">Select Hall</label>
+        <select [(ngModel)]="selectedHall" name="hall" class="w-full border border-gray-300 p-2 rounded bg-white">
+          <option *ngFor="let hall of halls" [value]="hall">{{ hall }}</option>
+        </select>
+      </div>
+
+      <!-- Meal Selection -->
+      <div>
+        <label class="block mb-1 text-gray-700 font-medium">Select Meal</label>
+        <select [(ngModel)]="selectedMeal" name="meal" class="w-full border border-gray-300 p-2 rounded bg-white">
+          <option>Breakfast</option>
+          <option>Lunch</option>
+          <option>Dinner</option>
+        </select>
+      </div>
+
+      <!-- Date Selection -->
+      <div>
+        <label class="block mb-1 text-gray-700 font-medium">Meal Date</label>
+        <input type="date" [(ngModel)]="mealDate" name="date" class="w-full border border-gray-300 p-2 rounded bg-white" />
+      </div>
+
+      <!-- Quantity -->
+      <div>
+        <label class="block mb-1 text-gray-700 font-medium">Quantity</label>
+        <input type="number" min="1" [(ngModel)]="quantity" name="quantity" class="w-full border border-gray-300 p-2 rounded bg-white" />
+      </div>
+
+      <!-- Total Price & Pay Button -->
+      <div class="flex items-end">
+        <button
+          type="button"
+          (click)="openPaymentModal()"
+          class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          Pay ৳{{ quantity * 30 }} & Buy Token
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Purchased Tokens -->
+  <div class="bg-white p-6 rounded-lg shadow border">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">📄 Your Tokens</h2>
+
+    <div *ngIf="tokens.length === 0" class="text-gray-500">No tokens purchased yet.</div>
+
+    <table *ngIf="tokens.length > 0" class="w-full mt-4 border">
+      <thead>
+        <tr class="bg-gray-100 text-left">
+          <th class="p-2 border">Hall</th>
+          <th class="p-2 border">Meal</th>
+          <th class="p-2 border">Date</th>
+          <th class="p-2 border">Quantity</th>
+          <th class="p-2 border">Price (৳)</th>
+          <th class="p-2 border">bKash No.</th>
+          <th class="p-2 border">Trx ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of tokens">
+          <td class="p-2 border">{{ t.hall }}</td>
+          <td class="p-2 border">{{ t.meal }}</td>
+          <td class="p-2 border">{{ t.date }}</td>
+          <td class="p-2 border">{{ t.quantity }}</td>
+          <td class="p-2 border">{{ t.price }}</td>
+          <td class="p-2 border">{{ t.bkashNumber }}</td>
+          <td class="p-2 border">{{ t.trxId }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- bKash Payment Modal -->
+<app-bkash-payment
+  [visible]="showPaymentModal"
+  (cancel)="cancelPayment()"
+  (confirm)="handleBkashConfirm($event)"
+></app-bkash-payment>
