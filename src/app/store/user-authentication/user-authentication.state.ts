@@ -37,7 +37,10 @@ export class UserAuthenticateState {
   static getRefreshToken (state : UserAuthenticateStateModel){
     return state.userData?.refreshToken;
   }
-
+  @Selector()
+  static getUserData (state : UserAuthenticateStateModel){
+    return state.userData;
+  }
   constructor(private store : Store,private apiService : ApiService){}
   
   @Action(userAuthenticateAction.UserLogin)

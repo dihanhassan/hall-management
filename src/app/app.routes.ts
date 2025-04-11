@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegistrationComponent } from './pages/auth/registration/registration.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout/main-layout.component';
 import { ViewPostComponent } from './shared/components/view-post/view-post/view-post.component';
+import { TokenDashboardComponent } from './pages/token-dashboard/token-dashboard.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,6 +27,10 @@ export const routes: Routes = [
     {
       path : 'content/view-post/:id',
       component : ViewPostComponent
-    }
+    },
+    {
+      path : 'dashboard',
+      component : TokenDashboardComponent
+    },
 
 ];

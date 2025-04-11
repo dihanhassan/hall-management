@@ -16,11 +16,9 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     ReactiveFormsModule,
     HttpClientModule,
-    NgIf,
     NgClass,
-    RouterModule,
-    RouterLink
-  ],
+    RouterModule
+],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // Corrected from `styleUrl` to `styleUrls`
 })
@@ -79,7 +77,7 @@ export class LoginComponent implements OnInit {
     this.store.select(UserAuthenticateState.isLogedIn).pipe(take(1)).subscribe((loggedIn: boolean) => {
       if (loggedIn) {
         this.toastr.success('Login Successfull');
-        this.router.navigate(['/content']);
+        this.router.navigate(['/dashboard']);
       }
       else {
         

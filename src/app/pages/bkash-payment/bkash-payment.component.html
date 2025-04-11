@@ -1,0 +1,67 @@
+<div *ngIf="visible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm">
+      
+      <!-- Header -->
+      <div class="bg-[#d81b60] rounded-t-lg p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <img src="../../../assets/img/bkash_logo.png" alt="bKash Logo" class="h-6" />
+          <span class="text-white font-semibold text-lg">Payment</span>
+        </div>
+        <div class="text-white text-right font-bold"></div>
+      </div>
+  
+      <!-- Body -->
+      <div class="p-6">
+        <div class="mb-4 text-center text-sm text-gray-600">
+          <p class="font-medium">TestMerchant</p>
+          <p class="text-xs text-gray-400">Invoice: 2021</p>
+        </div>
+  
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Your bKash Account Number</label>
+          <input
+            type="text"
+            [(ngModel)]="bkashNumber"
+            placeholder="e.g. 01XXXXXXXXX"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#d81b60]"
+          />
+        </div>
+  
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Transaction ID</label>
+          <input
+            type="text"
+            [(ngModel)]="trxId"
+            placeholder="TXN123456"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#d81b60]"
+          />
+        </div>
+  
+        <p class="text-xs text-gray-500 mb-4">
+          By clicking on Confirm, you are agreeing to the 
+          <span class="text-[#d81b60] underline cursor-pointer">terms & conditions</span>.
+        </p>
+  
+        <div class="flex justify-end gap-2">
+          <button
+            (click)="onCancel()"
+            class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+          >
+            Cancel
+          </button>
+          <button
+            (click)="onConfirm()"
+            class="bg-[#d81b60] text-white px-4 py-2 rounded hover:bg-pink-700 transition"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+  
+      <!-- Footer -->
+      <div class="bg-gray-100 text-center text-xs py-2 text-gray-500 rounded-b-lg">
+        © bKash Limited
+      </div>
+    </div>
+  </div>
+  
